@@ -26,8 +26,8 @@ double currentBalance = 0.0;
 var reader = new StringReader(bankRecords);
 
 string? line;
-while ((line = reader.ReadLine()) is not null)
-{
+while ((line = reader.ReadLine()) is not null) {
+    
     if (string.IsNullOrWhiteSpace(line)) continue;
     // Split the line based on comma delimiter and trim each part
     string[] parts = line.Split(',');
