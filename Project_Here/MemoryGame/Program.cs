@@ -13,9 +13,10 @@ app.MapGet("api/cats", async () =>
 
     //To get more images from the API I need to use the API key! 
     //This is how to fetch it
-    client.DefaultRequestHeaders.Add("x-api-key", "live_swqdRK6fmlQ40nO4EUpFAy0y8efjmLiIyA8jwQYf0QqBgQatERvdlXygGtYnvyUP");
+        // -> For this I wont use that tho (public repo)
+    //client.DefaultRequestHeaders.Add("x-api-key", USE_API_KEY_HERE);
 
-    string url = "https://api.thecatapi.com/v1/images/search?limit=20";
+    string url = "https://api.thecatapi.com/v1/images/search?limit=10";
 
     List<CatImage>? cats = await client.GetFromJsonAsync<List<CatImage>>(url);
 
