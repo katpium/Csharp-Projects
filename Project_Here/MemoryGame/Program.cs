@@ -7,7 +7,11 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.MapGet("api/cats", async () =>
+//This helps shows the front end
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+app.MapGet("/api/cats", async () =>
 {
     HttpClient client = new HttpClient();
 
@@ -22,8 +26,10 @@ app.MapGet("api/cats", async () =>
 
     if(cats == null || cats.Count == 0)
     {
-        return Result.NotFound("No cat image found.");
+        return Results.NotFound("No cat image found.");
     }
+
+    return Results.Ok(cats);
 });
 
 app.Run();
