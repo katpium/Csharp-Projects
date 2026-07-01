@@ -26,9 +26,10 @@ async function startGame () {
 
     // Call the API for cats images
     const response = await fetch("/api/cats");
-    const catImage = await response.json(); //converts to JavaScript obj
+    const catImages = await response.json(); //converts to JavaScript obj
 
-    cards = createCardPairs(catImage); //take 10 cards and turn into 20 cards
+    const fiveCatImages = catImages.slice(0, 5);
+    cards = createCardPairs(fiveCatImages); //take 5 cards and turn into 10 cards
     shuffleCards(cards); //shuffle it
     renderCards(cards); //create the HTML card elements
     
@@ -142,6 +143,12 @@ function checkForMatch(){
         secondCard = null;
 
         matchedPairs++;
+
+        statusText.textContent = `Matched pairs: ${matchedPairs} / 5`;
+
+        if (matchedPairs === 5) {
+            statusText.textContent = "You found all cat pairs!";
+        }
     } else {
         lockBoard = true; //Cannot click more card!!
 
@@ -155,11 +162,7 @@ function checkForMatch(){
             secondCard = null;
             lockBoard = false;
 
-            statusText.textContent = `Matched pairs: ${matchedPairs} / 10`;
-
-            if (matchedPairs === 10) {
-            statusText.textContent = "You found all cat pairs!";
-}
+            statusText.textContent = `Matched pairs: ${matchedPairs} / 5`;
         }, 1000 ); //set after 1 second REMOVE the revealed context
     }
 }
